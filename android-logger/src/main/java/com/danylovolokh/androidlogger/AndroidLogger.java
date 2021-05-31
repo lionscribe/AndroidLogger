@@ -6,6 +6,8 @@ import android.content.Context;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.volokh.danylo.vonalogger.VoNaLogger;
 
@@ -121,23 +123,28 @@ public class AndroidLogger {
     }
 
     public static int e(final String TAG, final String message) {
-        return sVoNaLogger.writeLog(mProcessName, Thread.currentThread().getId(), LogLevel.ERROR, TAG, message);
+        return sVoNaLogger.writeLog(timeStamp(), mProcessName, Thread.currentThread().getId(), LogLevel.ERROR, TAG, message);
     }
 
     public static int w(final String TAG, final String message) {
-        return sVoNaLogger.writeLog(mProcessName, Thread.currentThread().getId(), LogLevel.WARN, TAG, message);
+        return sVoNaLogger.writeLog(timeStamp(), mProcessName, Thread.currentThread().getId(), LogLevel.WARN, TAG, message);
     }
 
     public static int d(final String TAG, final String message) {
-        return sVoNaLogger.writeLog(mProcessName, Thread.currentThread().getId(), LogLevel.DEBUG, TAG, message);
+        return sVoNaLogger.writeLog(timeStamp(), mProcessName, Thread.currentThread().getId(), LogLevel.DEBUG, TAG, message);
     }
 
     public static int v(final String TAG, final String message) {
-        return sVoNaLogger.writeLog(mProcessName, Thread.currentThread().getId(), LogLevel.VERBOSE, TAG, message);
+        return sVoNaLogger.writeLog(timeStamp(), mProcessName, Thread.currentThread().getId(), LogLevel.VERBOSE, TAG, message);
     }
 
     public static int i(final String TAG, final String message) {
-        return sVoNaLogger.writeLog(mProcessName, Thread.currentThread().getId(), LogLevel.INFO, TAG, message);
+        return sVoNaLogger.writeLog(timeStamp(), mProcessName, Thread.currentThread().getId(), LogLevel.INFO, TAG, message);
+    }
+
+    static String timeStamp()
+    {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
     }
 
     /**
@@ -206,4 +213,3 @@ public class AndroidLogger {
     }
 
 }
-
